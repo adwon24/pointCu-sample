@@ -50,17 +50,6 @@
         app:layout_constraintTop_toBottomOf="@id/btn_user" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_start_lottery_act"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/bg_btn_selector_green"
-        android:text="START LOTTERY ACTIVITY"
-        android:textColor="@android:color/white"
-        app:layout_constraintLeft_toLeftOf="@id/btn_start"
-        app:layout_constraintTop_toBottomOf="@id/btn_start_roulette_act" />
-
-    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_start_roulette_frag"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
@@ -72,6 +61,18 @@
         app:layout_constraintLeft_toRightOf="@id/btn_start_roulette_act" />
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_start_lottery_act"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_btn_selector_green"
+        android:text="START LOTTERY ACTIVITY"
+        android:textColor="@android:color/white"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="@id/btn_start"
+        app:layout_constraintTop_toBottomOf="@id/btn_start_roulette_act" />
+
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_start_lottery_frag"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
@@ -79,6 +80,51 @@
         android:background="@drawable/bg_btn_selector_green"
         android:text="START LOTTERY FRAGMENT"
         android:textColor="@android:color/white"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/btn_start_lottery_act"
         app:layout_constraintLeft_toRightOf="@id/btn_start_lottery_act" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_ad_eat"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/bg_btn_selector_green"
+        android:text="ADS-CU\nEAT"
+        android:textColor="@android:color/white"
+        app:layout_constraintLeft_toLeftOf="@id/btn_start"
+        app:layout_constraintTop_toBottomOf="@id/btn_start_lottery_act" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_ad_inventory"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:background="@drawable/bg_btn_selector_green"
+        android:text="ADS-CU\nINVENTORY"
+        android:textColor="@android:color/white"
+        app:layout_constraintLeft_toRightOf="@id/btn_ad_eat"
+        app:layout_constraintTop_toTopOf="@id/btn_ad_eat" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_ad_new_product"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_btn_selector_green"
+        android:text="ADS-CU\nNEW PRODUCT"
+        android:textColor="@android:color/white"
+        app:layout_constraintLeft_toLeftOf="@id/btn_start"
+        app:layout_constraintTop_toBottomOf="@id/btn_ad_eat" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_ad_pre_order"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:background="@drawable/bg_btn_selector_green"
+        android:text="ADS-CU\nPRE ORDER"
+        android:textColor="@android:color/white"
+        app:layout_constraintLeft_toRightOf="@id/btn_ad_new_product"
+        app:layout_constraintTop_toTopOf="@id/btn_ad_new_product" />
 </androidx.constraintlayout.widget.ConstraintLayout>

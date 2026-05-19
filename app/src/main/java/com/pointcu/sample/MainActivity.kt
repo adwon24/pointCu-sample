@@ -23,7 +23,7 @@ class MainActivity : BaseActivity() {
             //insets // 전체 화면 사용 안할 경우 주석 처리
         }
 
-        setTitle("MAIN")
+        setTitle("PointCu SDK")
         replaceFragment(containerViewId = R.id.container, fragment = SamplePoint4UFragment.newInstance(), backStack = false)
 
         // Point4u 포그라운드 노티피케이션 오른쪽 클릭 시 이동하기 위한 인텐트 검사
