@@ -42,7 +42,7 @@
         android:id="@+id/btn_start_roulette_act"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="50dp"
         android:background="@drawable/bg_btn_selector_green"
         android:text="START ROULETTE ACTIVITY"
         android:textColor="@android:color/white"
@@ -127,4 +127,25 @@
         android:textColor="@android:color/white"
         app:layout_constraintLeft_toRightOf="@id/btn_ad_new_product"
         app:layout_constraintTop_toTopOf="@id/btn_ad_new_product" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_step"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_white"
+        android:text="GET STEP"
+        android:textColor="@android:color/black"
+        app:layout_constraintLeft_toLeftOf="@id/btn_start"
+        app:layout_constraintTop_toBottomOf="@id/btn_ad_pre_order" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_step"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="@id/btn_step"
+        app:layout_constraintLeft_toRightOf="@id/btn_step"
+        app:layout_constraintTop_toTopOf="@id/btn_step" />
 </androidx.constraintlayout.widget.ConstraintLayout>

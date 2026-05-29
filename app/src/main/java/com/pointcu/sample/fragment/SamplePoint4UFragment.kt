@@ -46,6 +46,7 @@ class SamplePoint4UFragment : BaseFragment(R.layout.fragment_sample_point4u) {
                             .setEventIntent(Intent(act, MainActivity::class.java).apply {
                                 putExtra(EXTRA_NAV_POINT4U, true)
                             })
+                            .setUseTestServer(false) // TODO alpha 버전에서는 실제 상용 서버 지원하지 않음 -> 정시 버전 배포 시 동작 함
                             .setGender(Point4uGender.parse(user.gender))
                             .build()
                     )
@@ -134,6 +135,13 @@ class SamplePoint4UFragment : BaseFragment(R.layout.fragment_sample_point4u) {
         findViewById<AppCompatButton>(R.id.btn_ad_pre_order)?.setOnClickListener {
             activity?.let { act ->
                 Point4u.startPoint4uAdvertise(act as AppCompatActivity, Point4uAd.P4U_AD_PRE_ORDER, adListener)
+            }
+        }
+        // 현재 걸음 확인
+        findViewById<AppCompatButton>(R.id.btn_step)?.setOnClickListener {
+            activity?.let { act ->
+                val step = Point4u.getStepCount(act as AppCompatActivity)
+                findViewById<AppCompatTextView>(R.id.tv_step)?.text = step.toString()
             }
         }
     }
