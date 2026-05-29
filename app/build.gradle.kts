@@ -45,7 +45,7 @@ dependencies {
 
     implementation(libs.androidx.fragment)
 
-    implementation("io.github.adwon24:pointcu:0.0.1.8-alpha")
+    implementation("io.github.adwon24:pointcu:0.0.2.0-alpha")
     implementation("com.igaworks.ssp:IgawAdPopcornSSP:3.10.1")
     implementation(platform("com.naver.gfpsdk:nam-bom:8.10.3"))
     implementation("com.naver.gfpsdk:nam-core")
