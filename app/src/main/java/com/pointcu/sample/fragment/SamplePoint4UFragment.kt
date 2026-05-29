@@ -214,6 +214,7 @@ class SamplePoint4UFragment : BaseFragment(R.layout.fragment_sample_point4u) {
             initPref(context)
             sharedPref?.edit {
                 putString(KEY_USER, user.code)
+                apply()
             }
         }
 
