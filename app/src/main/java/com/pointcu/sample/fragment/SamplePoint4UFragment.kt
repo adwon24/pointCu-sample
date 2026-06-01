@@ -137,6 +137,8 @@ class SamplePoint4UFragment : BaseFragment(R.layout.fragment_sample_point4u) {
                 Point4u.startPoint4uAdvertise(act as AppCompatActivity, Point4uAd.P4U_AD_PRE_ORDER, adListener)
             }
         }
+
+
         // 현재 걸음 확인
         findViewById<AppCompatButton>(R.id.btn_step)?.setOnClickListener {
             activity?.let { act ->

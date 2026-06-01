@@ -20,7 +20,7 @@ enum class TestUser(val code: String, val birth: String, val age: String, val ge
     companion object {
         fun parse(code: String): TestUser {
             return entries.firstOrNull {
-                code == it.code || code.contains(it.code)
+                code == it.code
             } ?: USER_04
         }
     }
