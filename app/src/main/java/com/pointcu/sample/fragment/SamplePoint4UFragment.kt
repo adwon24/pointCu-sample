@@ -113,6 +113,16 @@ class SamplePoint4UFragment : BaseFragment(R.layout.fragment_sample_point4u) {
             }
         }
 
+        // 현재 걸음 확인
+        findViewById<AppCompatButton>(R.id.btn_step)?.setOnClickListener {
+            activity?.let { act ->
+                val step = Point4u.getStepCount(act as AppCompatActivity)
+                findViewById<AppCompatTextView>(R.id.tv_step)?.text = step.toString()
+            }
+        }
+
+
+
         // 오늘 뭐먹지 광고 구동
         findViewById<AppCompatButton>(R.id.btn_ad_eat)?.setOnClickListener {
             activity?.let { act ->
@@ -137,20 +147,12 @@ class SamplePoint4UFragment : BaseFragment(R.layout.fragment_sample_point4u) {
                 Point4u.startPoint4uAdvertise(act as AppCompatActivity, Point4uAd.P4U_AD_PRE_ORDER, adListener)
             }
         }
-
-
-        // 현재 걸음 확인
-        findViewById<AppCompatButton>(R.id.btn_step)?.setOnClickListener {
-            activity?.let { act ->
-                val step = Point4u.getStepCount(act as AppCompatActivity)
-                findViewById<AppCompatTextView>(R.id.tv_step)?.text = step.toString()
-            }
-        }
     }
 
     val adListener = object : Point4u.OnPoint4UAdListener {
         override fun onPoint4uAdShow(type: Point4uAd?) {
             Log.d("adwon.sample", "[adwon sample] onPoint4uAdShow() $type")
+
         }
 
         override fun onPoint4uAdFail(type: Point4uAd?) {
@@ -167,6 +169,7 @@ class SamplePoint4UFragment : BaseFragment(R.layout.fragment_sample_point4u) {
 
         override fun onPoint4uAdClick(type: Point4uAd?) {
             Log.d("adwon.sample", "[adwon sample] onPoint4uAdClick() $type")
+            // TODO [오늘 뭐먹지]는 클릭형 광고 상품으로 기획 전달 받았음 -> 앱에서 클릭 이후 5초 체크 후에 내부 포인트 지급하도록 앱 내 로직 구현하면 됨
         }
     }
 
