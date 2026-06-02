@@ -151,9 +151,7 @@ class SamplePoint4UFragment : BaseFragment(R.layout.fragment_sample_point4u) {
     val adListener = object : Point4u.OnPoint4UAdListener {
         override fun onPoint4uAdShow(type: Point4uAd?) {
             Log.d("adwon.sample", "[adwon sample] onPoint4uAdShow() $type")
-            if (type == Point4uAd.P4U_AD_EAT) {
 
-            }
         }
 
         override fun onPoint4uAdFail(type: Point4uAd?) {
@@ -171,9 +169,11 @@ class SamplePoint4UFragment : BaseFragment(R.layout.fragment_sample_point4u) {
         override fun onPoint4uAdClick(type: Point4uAd?) {
             Log.d("adwon.sample", "[adwon sample] onPoint4uAdClick() $type")
             // TODO [오늘 뭐먹지]는 클릭형 광고 상품으로 기획 전달 받았음 -> 앱에서 클릭 이후 5초 체크 후에 내부 포인트 지급하도록 앱 내 로직 구현하면 됨
-            activity?.let { act ->
-                saveEatClickStart(act, true)
-                saveEatClickMillis(act)
+            if (type == Point4uAd.P4U_AD_EAT) {
+                activity?.let { act ->
+                    saveEatClickStart(act, true)
+                    saveEatClickMillis(act)
+                }
             }
         }
     }
