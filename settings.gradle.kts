@@ -19,11 +19,11 @@ dependencyResolutionManagement {
 
         maven {
             name = "OfferWall - AdForus GreenP v4"
-            url = uri("https://nexus.adforus.com/repository/greenp/")
+            url = uri("https://nexus.adforus.com/repository/greenp/") // TODO GreenP 오퍼월 필요
         }
         maven {
             name = "Pangle"
-            url = uri("https://artifact.bytedance.com/repository/pangle/")
+            url = uri("https://artifact.bytedance.com/repository/pangle/") // TODO 애드팝콘 가이드에 명시 추가항목
         }
     }
 }

@@ -30,6 +30,10 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+
+    buildFeatures {
+        viewBinding = true // TODO 애드포러스 greenP 오퍼월 SDK 사용시에 필수로 viewBinding 사용 필요함
+    }
 }
 
 dependencies {
@@ -46,6 +50,8 @@ dependencies {
     implementation(libs.androidx.fragment)
 
     implementation("io.github.adwon24:pointcu:0.0.2.2-alpha")
+
+    // 애드팝콘 가이드 명시 추가항목 ==========================================
     implementation("com.igaworks.ssp:IgawAdPopcornSSP:3.10.1")
     implementation(platform("com.naver.gfpsdk:nam-bom:8.10.3"))
     implementation("com.naver.gfpsdk:nam-core")
@@ -57,4 +63,5 @@ dependencies {
     //implementation("com.google.android.gms:play-services-ads:24.8.0") // meta-data 키 없으므로 주석처리. AdMob 키 있을 경우 manifest에 등록 후 주석 제거
     implementation("androidx.annotation:annotation:1.4.0")
     implementation("com.facebook.android:audience-network-sdk:6.21.0")
+    // ====================================================================
 }

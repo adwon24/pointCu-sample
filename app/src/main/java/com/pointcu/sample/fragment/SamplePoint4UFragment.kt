@@ -122,7 +122,6 @@ class SamplePoint4UFragment : BaseFragment(R.layout.fragment_sample_point4u) {
         }
 
 
-
         // 오늘 뭐먹지 광고 구동
         findViewById<AppCompatButton>(R.id.btn_ad_eat)?.setOnClickListener {
             activity?.let { act ->
@@ -152,7 +151,9 @@ class SamplePoint4UFragment : BaseFragment(R.layout.fragment_sample_point4u) {
     val adListener = object : Point4u.OnPoint4UAdListener {
         override fun onPoint4uAdShow(type: Point4uAd?) {
             Log.d("adwon.sample", "[adwon sample] onPoint4uAdShow() $type")
+            if (type == Point4uAd.P4U_AD_EAT) {
 
+            }
         }
 
         override fun onPoint4uAdFail(type: Point4uAd?) {
@@ -170,6 +171,26 @@ class SamplePoint4UFragment : BaseFragment(R.layout.fragment_sample_point4u) {
         override fun onPoint4uAdClick(type: Point4uAd?) {
             Log.d("adwon.sample", "[adwon sample] onPoint4uAdClick() $type")
             // TODO [오늘 뭐먹지]는 클릭형 광고 상품으로 기획 전달 받았음 -> 앱에서 클릭 이후 5초 체크 후에 내부 포인트 지급하도록 앱 내 로직 구현하면 됨
+            activity?.let { act ->
+                saveEatClickStart(act, true)
+                saveEatClickMillis(act)
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        activity?.let { act ->
+            if (loadEatClickStart(act)) { // 오늘 뭐먹지 광고 클릭으로 화면 나갔다가 들어왔는지 체크
+                saveEatClickStart(act, false) // 플래그 초기화
+                if (System.currentTimeMillis() - loadEatClickMillis(act) > 5000) { // 5초 이후에 화면 돌아왔는지 체크
+                    // TODO 포인트 적립
+                    Toast.makeText(act, "포인트 적립되었습니다.", Toast.LENGTH_LONG).show()
+                } else {
+                    // TODO 토스트 or 팝업 등 문구 노출 - 예시 문구) "페이지 5초 이상 머물러야 보상 획득 가능!"
+                    Toast.makeText(act, "페이지 5초 이상 머물러야 보상 획득 가능!", Toast.LENGTH_LONG).show()
+                }
+            }
         }
     }
 
@@ -207,6 +228,8 @@ class SamplePoint4UFragment : BaseFragment(R.layout.fragment_sample_point4u) {
     companion object {
         const val PREF_NAME = "p4u.pref"
         const val KEY_USER = "userCode"
+        const val KEY_EAT_CLICK = "eatClick"
+        const val KEY_EAT_CLICK_MILLIS = "eatClickMillis"
 
         var sharedPref: SharedPreferences? = null
         fun initPref(context: Context) {
@@ -226,6 +249,30 @@ class SamplePoint4UFragment : BaseFragment(R.layout.fragment_sample_point4u) {
             initPref(context)
             val value = sharedPref?.getString(KEY_USER, "")
             return TestUser.parse(value ?: "")
+        }
+
+        fun saveEatClickStart(context: Context, fromEat: Boolean) {
+            initPref(context)
+            sharedPref?.edit {
+                putBoolean(KEY_EAT_CLICK, fromEat)
+            }
+        }
+
+        fun loadEatClickStart(context: Context): Boolean {
+            initPref(context)
+            return sharedPref?.getBoolean(KEY_EAT_CLICK, false) ?: false
+        }
+
+        fun saveEatClickMillis(context: Context) {
+            initPref(context)
+            sharedPref?.edit {
+                putLong(KEY_EAT_CLICK_MILLIS, System.currentTimeMillis())
+            }
+        }
+
+        fun loadEatClickMillis(context: Context): Long {
+            initPref(context)
+            return sharedPref?.getLong(KEY_EAT_CLICK_MILLIS, 0L) ?: 0L
         }
 
         fun newInstance() = SamplePoint4UFragment().apply {
