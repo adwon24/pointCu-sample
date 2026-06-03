@@ -21,15 +21,20 @@ import com.adwon.pointcu.Point4uGender
 import com.pointcu.sample.MainActivity
 import com.pointcu.sample.MainActivity.Companion.EXTRA_NAV_POINT4U
 import com.pointcu.sample.R
+import com.pointcu.sample.advertise.SamplePoint4uPopup
 import com.pointcu.sample.common.BaseFragment
 import com.pointcu.sample.common.TestUser
 
 class SamplePoint4UFragment : BaseFragment(R.layout.fragment_sample_point4u) {
+
     private var user: TestUser = TestUser.USER_04
 
     @SuppressLint("ResourceType")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // Point4u 초기화
+        initPoint4u()
 
         // 선택된 사용자 세팅
         activity?.let { act -> getUser(act) }?.let { user = it }
@@ -39,21 +44,9 @@ class SamplePoint4UFragment : BaseFragment(R.layout.fragment_sample_point4u) {
         findViewById<AppCompatButton>(R.id.btn_start)?.setOnClickListener {
             activity?.let { act ->
                 try {
-                    Point4u.initialize(
-                        Point4UConfig.Builder(activity = act as AppCompatActivity)
-                            .setMemberId(user.code) // 사용자 id (필수)
-                            .setAge(user.age.toInt()) // 나이 (필수)
-                            .setEventIntent(Intent(act, MainActivity::class.java).apply {
-                                putExtra(EXTRA_NAV_POINT4U, true)
-                            })
-                            .setUseTestServer(false) // TODO alpha 버전에서는 실제 상용 서버 지원하지 않음 -> 정시 버전 배포 시 동작 함
-                            .setGender(Point4uGender.parse(user.gender))
-                            .build()
-                    )
-
-                    Point4u.startPointCU(act, object : Point4u.OnPoint4UFinishListener {
+                    Point4u.startPointCU(act as AppCompatActivity, object : Point4u.OnPoint4UFinishListener {
                         override fun onMoveInventory() {
-                            Log.e("adwonSDK.sample", "[adwon sample] onMoveInventory()")
+                            Log.e(TAG, "[adwon sample] onMoveInventory()")
                         }
                     })
                 } catch (e: Point4uException) {
@@ -73,15 +66,15 @@ class SamplePoint4UFragment : BaseFragment(R.layout.fragment_sample_point4u) {
                 try {
                     Point4u.startGameRouletteActivity(act as AppCompatActivity, object : Point4u.OnPoint4UGameListener {
                         override fun onGameLoadFail(errorCode: Int, errorMessage: String) {
-                            Log.d("adwon.sample", "[adwon sample] onGameLoadFail() errorCode : $errorCode, errorMessage : $errorMessage")
+                            Log.d(TAG, "[adwon sample] onGameLoadFail() errorCode : $errorCode, errorMessage : $errorMessage")
                         }
 
                         override fun onGameComplete(winPoint: Int) {
-                            Log.d("adwon.sample", "[adwon sample] onGameComplete() winPoint : $winPoint")
+                            Log.d(TAG, "[adwon sample] onGameComplete() winPoint : $winPoint")
                         }
 
                         override fun onGameClose() {
-                            Log.d("adwon.sample", "[adwon sample] onGameClose()")
+                            Log.d(TAG, "[adwon sample] onGameClose()")
                         }
                     })
                 } catch (e: Point4uException) {
@@ -96,15 +89,15 @@ class SamplePoint4UFragment : BaseFragment(R.layout.fragment_sample_point4u) {
                 try {
                     Point4u.startGameRouletteFragment(act as AppCompatActivity, R.id.container, object : Point4u.OnPoint4UGameListener {
                         override fun onGameLoadFail(errorCode: Int, errorMessage: String) {
-                            Log.d("adwon.sample", "onGameLoadFail() errorCode : $errorCode, errorMessage : $errorMessage")
+                            Log.d(TAG, "onGameLoadFail() errorCode : $errorCode, errorMessage : $errorMessage")
                         }
 
                         override fun onGameComplete(winPoint: Int) {
-                            Log.d("adwon.sample", "onGameComplete() winPoint : $winPoint")
+                            Log.d(TAG, "onGameComplete() winPoint : $winPoint")
                         }
 
                         override fun onGameClose() {
-                            Log.d("adwon.sample", "onGameClose()")
+                            Log.d(TAG, "onGameClose()")
                         }
                     })
                 } catch (e: Point4uException) {
@@ -125,49 +118,67 @@ class SamplePoint4UFragment : BaseFragment(R.layout.fragment_sample_point4u) {
         // 오늘 뭐먹지 광고 구동
         findViewById<AppCompatButton>(R.id.btn_ad_eat)?.setOnClickListener {
             activity?.let { act ->
-                Point4u.startPoint4uAdvertise(act as AppCompatActivity, Point4uAd.P4U_AD_EAT, adListener)
+                try {
+                    Point4u.startPoint4uAdvertise(act as AppCompatActivity, Point4uAd.P4U_AD_EAT, adListener)
+                } catch (e: Point4uException) {
+                    Toast.makeText(act, e.message, Toast.LENGTH_SHORT).show()
+                }
             }
         }
         // 재고 조회 광고 구동
         findViewById<AppCompatButton>(R.id.btn_ad_inventory)?.setOnClickListener {
             activity?.let { act ->
-                Point4u.startPoint4uAdvertise(act as AppCompatActivity, Point4uAd.P4U_AD_INVENTORY, adListener)
+                try {
+                    SamplePoint4uPopup.show(parentFragmentManager, Point4uAd.P4U_AD_INVENTORY, adListener)
+                } catch (e: Point4uException) {
+                    Toast.makeText(act, e.message, Toast.LENGTH_SHORT).show()
+                }
             }
         }
         // 신상품 광고 구동
         findViewById<AppCompatButton>(R.id.btn_ad_new_product)?.setOnClickListener {
             activity?.let { act ->
-                Point4u.startPoint4uAdvertise(act as AppCompatActivity, Point4uAd.P4U_AD_NEW_PRODUCT, adListener)
+                try {
+                    SamplePoint4uPopup.show(parentFragmentManager, Point4uAd.P4U_AD_NEW_PRODUCT, adListener)
+                } catch (e: Point4uException) {
+                    Toast.makeText(act, e.message, Toast.LENGTH_SHORT).show()
+                }
             }
         }
         // 예약 주문 광고 구동
         findViewById<AppCompatButton>(R.id.btn_ad_pre_order)?.setOnClickListener {
             activity?.let { act ->
-                Point4u.startPoint4uAdvertise(act as AppCompatActivity, Point4uAd.P4U_AD_PRE_ORDER, adListener)
+                try {
+                    SamplePoint4uPopup.show(parentFragmentManager, Point4uAd.P4U_AD_PRE_ORDER, adListener)
+                } catch (e: Point4uException) {
+                    Toast.makeText(act, e.message, Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }
 
+
     val adListener = object : Point4u.OnPoint4UAdListener {
         override fun onPoint4uAdShow(type: Point4uAd?) {
-            Log.d("adwon.sample", "[adwon sample] onPoint4uAdShow() $type")
+            Log.d(TAG, "[adwon sample] onPoint4uAdShow() $type")
 
         }
 
         override fun onPoint4uAdFail(type: Point4uAd?) {
-            Log.d("adwon.sample", "[adwon sample] onPoint4uAdFail() $type")
+            Log.d(TAG, "[adwon sample] onPoint4uAdFail() $type")
         }
 
         override fun onPoint4uAdClose(type: Point4uAd?) {
-            Log.d("adwon.sample", "[adwon sample] onPoint4uAdClose() $type")
+            Log.d(TAG, "[adwon sample] onPoint4uAdClose() $type")
         }
 
         override fun onPoint4uAdEarned(type: Point4uAd?) {
-            Log.d("adwon.sample", "[adwon sample] onPoint4uAdEarned() $type")
+            Log.d(TAG, "[adwon sample] onPoint4uAdEarned() $type")
         }
 
         override fun onPoint4uAdClick(type: Point4uAd?) {
-            Log.d("adwon.sample", "[adwon sample] onPoint4uAdClick() $type")
+            Log.d(TAG, "[adwon sample] onPoint4uAdClick() $type")
+
             // TODO [오늘 뭐먹지]는 클릭형 광고 상품으로 기획 전달 받았음 -> 앱에서 클릭 이후 5초 체크 후에 내부 포인트 지급하도록 앱 내 로직 구현하면 됨
             if (type == Point4uAd.P4U_AD_EAT) {
                 activity?.let { act ->
@@ -194,6 +205,22 @@ class SamplePoint4UFragment : BaseFragment(R.layout.fragment_sample_point4u) {
         }
     }
 
+    private fun initPoint4u() {
+        activity?.let { act ->
+            Point4u.initialize(
+                Point4UConfig.Builder(activity = act as AppCompatActivity)
+                    .setMemberId(user.code) // 사용자 id (필수)
+                    .setAge(user.age.toInt()) // 나이 (필수)
+                    .setEventIntent(Intent(act, MainActivity::class.java).apply {
+                        putExtra(EXTRA_NAV_POINT4U, true)
+                    })
+                    .setUseTestServer(true) // TODO alpha 버전에서는 실제 상용 서버 지원하지 않음 -> 정식 버전 배포 시 동작 함
+                    .setGender(Point4uGender.parse(user.gender))
+                    .build()
+            )
+        }
+    }
+
     private fun selectUser() {
         activity?.let {
             val dialog = AlertDialog.Builder(it)
@@ -217,9 +244,11 @@ class SamplePoint4UFragment : BaseFragment(R.layout.fragment_sample_point4u) {
                         Point4u.clearUserData(act as AppCompatActivity) // TODO 사용자 변경 시 Point4u 로컬 데이터 초기화
                         Toast.makeText(act, "사용자 정보가 초기화됐습니다.", Toast.LENGTH_SHORT).show()
                     }
+                    user = newUser
+                    findViewById<AppCompatTextView>(R.id.tv_user)?.text = user.code
+
+                    initPoint4u() // TODO 사용자 변경 시 다시 초기화
                 }
-                user = newUser
-                findViewById<AppCompatTextView>(R.id.tv_user)?.text = user.code
             }
             dialog.show()
         }

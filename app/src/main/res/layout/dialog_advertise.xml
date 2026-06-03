@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/ad_dialog_width"
+    android:layout_height="@dimen/ad_dialog_height">
+
+    <com.adwon.pointcu.advertise.AdWonAdView
+        android:id="@+id/advertiseView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!-- 로딩 레이어 -->
+    <FrameLayout
+        android:id="@+id/loadingContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#66000000">
+
+        <ProgressBar
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center" />
+
+    </FrameLayout>
+</FrameLayout>
