@@ -18,6 +18,7 @@ import com.adwon.pointcu.Point4u
 import com.adwon.pointcu.Point4uAd
 import com.adwon.pointcu.Point4uException
 import com.adwon.pointcu.Point4uGender
+import com.pointcu.sample.BuildConfig
 import com.pointcu.sample.MainActivity
 import com.pointcu.sample.MainActivity.Companion.EXTRA_NAV_POINT4U
 import com.pointcu.sample.R
@@ -214,7 +215,7 @@ class SamplePoint4UFragment : BaseFragment(R.layout.fragment_sample_point4u) {
                     .setEventIntent(Intent(act, MainActivity::class.java).apply {
                         putExtra(EXTRA_NAV_POINT4U, true)
                     })
-                    .setUseTestServer(true) // TODO alpha 버전에서는 실제 상용 서버 지원하지 않음 -> 정식 버전 배포 시 동작 함
+                    .setUseTestServer(BuildConfig.DEBUG) // 테스트 서버 사용 여부. true 일 경우 테스트 서버 사용. 디폴트는 false
                     .setGender(Point4uGender.parse(user.gender))
                     .build()
             )

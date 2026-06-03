@@ -18,6 +18,9 @@ android {
     }
 
     buildTypes {
+        debug {
+            isMinifyEnabled = false
+        }
         release {
             isMinifyEnabled = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
@@ -33,6 +36,7 @@ android {
 
     buildFeatures {
         viewBinding = true // TODO 애드포러스 greenP 오퍼월 SDK 사용시에 필수로 viewBinding 사용 필요함
+        buildConfig = true
     }
 }
 
