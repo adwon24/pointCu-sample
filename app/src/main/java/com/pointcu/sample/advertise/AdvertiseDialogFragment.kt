@@ -44,7 +44,7 @@ class AdvertiseDialogFragment : DialogFragment() {
             dialog?.window
         }
         // 로딩
-        loadingContainer = view.findViewById(R.id.loadingContainer)
+        loadingContainer = view.findViewById(R.id.adLoading)
 
 
         return AlertDialog.Builder(requireContext())
