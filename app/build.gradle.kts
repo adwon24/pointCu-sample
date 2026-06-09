@@ -53,7 +53,7 @@ dependencies {
 
     implementation(libs.androidx.fragment)
 
-    implementation("io.github.adwon24:pointcu:1.0.0.3")
+    implementation("io.github.adwon24:pointcu:1.0.0.4")
 
     // 애드팝콘 가이드 명시 추가항목 ==========================================
     implementation("com.igaworks.ssp:IgawAdPopcornSSP:3.10.3")
