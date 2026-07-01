@@ -22,6 +22,7 @@ import com.pointcu.sample.MainActivity
 import com.pointcu.sample.MainActivity.Companion.EXTRA_NAV_POINT4U
 import com.pointcu.sample.R
 import com.pointcu.sample.advertise.SamplePoint4uPopup
+import com.pointcu.sample.advertise.SampleWebViewFragment
 import com.pointcu.sample.common.BaseFragment
 import com.pointcu.sample.common.TestUser
 
@@ -150,6 +151,16 @@ class SamplePoint4UFragment : BaseFragment(R.layout.fragment_sample_point4u) {
             activity?.let { act ->
                 try {
                     SamplePoint4uPopup.show(parentFragmentManager, Point4uAd.P4U_AD_PRE_ORDER, adListener)
+                } catch (e: Point4uException) {
+                    Toast.makeText(act, e.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+        // 모비위드 광고 테스트
+        findViewById<AppCompatButton>(R.id.btn_sample_webview)?.setOnClickListener {
+            activity?.let { act ->
+                try {
+                    replaceFragment(R.id.container, SampleWebViewFragment.newInstance(), true)
                 } catch (e: Point4uException) {
                     Toast.makeText(act, e.message, Toast.LENGTH_SHORT).show()
                 }

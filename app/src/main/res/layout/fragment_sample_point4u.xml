@@ -148,4 +148,15 @@
         app:layout_constraintBottom_toBottomOf="@id/btn_step"
         app:layout_constraintLeft_toRightOf="@id/btn_step"
         app:layout_constraintTop_toTopOf="@id/btn_step" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_sample_webview"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_btn_selector_green"
+        android:text="SAMPLE WEBVIEW"
+        android:textColor="@android:color/white"
+        app:layout_constraintLeft_toLeftOf="@id/btn_start"
+        app:layout_constraintTop_toBottomOf="@id/btn_step" />
 </androidx.constraintlayout.widget.ConstraintLayout>
