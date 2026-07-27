@@ -53,17 +53,17 @@ dependencies {
 
     implementation(libs.androidx.fragment)
 
-    implementation("io.github.adwon24:pointcu:1.0.0.5")
+    implementation("io.github.adwon24:pointcu:1.0.0.6")
 
     // 애드팝콘 가이드 명시 추가항목 ==========================================
-    implementation("com.igaworks.ssp:IgawAdPopcornSSP:3.10.3")
-    implementation(platform("com.naver.gfpsdk:nam-bom:8.10.3")) // NAM
+    implementation("com.igaworks.ssp:IgawAdPopcornSSP:3.10.9")
+    implementation(platform("com.naver.gfpsdk:nam-bom:8.17.0")) // NAM
     implementation("com.naver.gfpsdk:nam-core") // NAM
     implementation("com.naver.gfpsdk.mediation:nam-nda") // NAM
-    implementation("com.applovin:applovin-sdk:13.6.2") // AppLovin
-    implementation("com.vungle:vungle-ads:7.7.2") // Vungle
-    implementation("com.pangle.global:pag-sdk:7.9.1.3") // Pangle
-    implementation("com.fyber:marketplace-sdk:8.4.1") // Fyber
+    implementation("com.applovin:applovin-sdk:13.6.3") // AppLovin
+    implementation("com.vungle:vungle-ads:7.7.5") // Vungle
+    implementation("com.pangle.global:pag-sdk:8.1.0.3") // Pangle
+    implementation("com.fyber:marketplace-sdk:8.4.6") // Fyber
     //implementation("com.google.android.gms:play-services-ads:24.8.0") // meta-data 키 없으므로 주석처리. AdMob 키 있을 경우 manifest에 등록 후 주석 제거
     implementation("androidx.annotation:annotation:1.4.0") // FaceBook
     implementation("com.facebook.android:audience-network-sdk:6.21.0") // FaceBook
